@@ -14,11 +14,21 @@ PODS:
   - AFNetworking/Serialization (3.0.4)
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
+  - BFRadialWaveHUD (1.5.3):
+    - BFRadialWaveView
+    - UIColor+BFPaperColors
+  - BFRadialWaveView (1.4.6):
+    - UIColor+BFPaperColors
+  - UIColor+BFPaperColors (1.7.2)
 
 DEPENDENCIES:
   - AFNetworking
+  - BFRadialWaveHUD (~> 1.5.3)
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
+  BFRadialWaveHUD: 5914e6d38ea707593d9f1bd9610c35a25fc6e921
+  BFRadialWaveView: dcf3f2b07b3993e6e748fd3489e490d94c1052a8
+  UIColor+BFPaperColors: 03101fe6c10ed00c6daae7c26553f1de41500853
 
 COCOAPODS: 0.39.0

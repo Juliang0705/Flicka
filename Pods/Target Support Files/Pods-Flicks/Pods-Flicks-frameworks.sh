@@ -85,7 +85,13 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Flicks/AFNetworking.framework"
+  install_framework "Pods-Flicks/BFRadialWaveHUD.framework"
+  install_framework "Pods-Flicks/BFRadialWaveView.framework"
+  install_framework "Pods-Flicks/UIColor_BFPaperColors.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Flicks/AFNetworking.framework"
+  install_framework "Pods-Flicks/BFRadialWaveHUD.framework"
+  install_framework "Pods-Flicks/BFRadialWaveView.framework"
+  install_framework "Pods-Flicks/UIColor_BFPaperColors.framework"
 fi

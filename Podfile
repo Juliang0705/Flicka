@@ -5,6 +5,8 @@ use_frameworks!
 
 target 'Flicks' do
     pod 'AFNetworking'
+    platform :ios, '7.1'
+    pod 'BFRadialWaveHUD', '~> 1.5.3'
 end
 
 
