@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         popularViewController.endPoint = "popular"
         popularViewController.title = "Popular"
         popularNavigationController.tabBarItem.title = "Popular"
-        popularNavigationController.tabBarItem.image = UIImage(named: "top_rated.png")
+        popularNavigationController.tabBarItem.image = UIImage(named: "popular.png")
         
         
         let upcomingNavigationController = storyboard.instantiateViewControllerWithIdentifier("MoviesNavigationController") as! UINavigationController
@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         upcomingViewController.endPoint = "upcoming"
         upcomingViewController.title = "Upcoming"
         upcomingNavigationController.tabBarItem.title = "Upcoming"
-        upcomingNavigationController.tabBarItem.image = UIImage(named: "top_rated.png")
+        upcomingNavigationController.tabBarItem.image = UIImage(named: "upcoming.png")
         
         
         let tabBarController = UITabBarController()
