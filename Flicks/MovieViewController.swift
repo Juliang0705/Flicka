@@ -19,7 +19,7 @@ class MovieViewController: UIViewController,UITableViewDataSource,UITableViewDel
     var refreshControl: UIRefreshControl!
     var loadingView: BFRadialWaveHUD!
     var filteredMovies: [NSDictionary]!
-    
+    var endPoint:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,9 +69,13 @@ class MovieViewController: UIViewController,UITableViewDataSource,UITableViewDel
             let imageUrl = NSURL(string: baseUrl + posterPath)
             cell.posterView.setImageWithURLRequest(NSURLRequest(URL: imageUrl!), placeholderImage: nil, success: {
                 (request,response,image) in
-                cell.posterView.image = image
-                cell.posterView.alpha = 0.0
-                UIView.animateWithDuration(1.0, animations: {cell.posterView.alpha = 1.0})
+                    if response != nil {
+                        cell.posterView.image = image
+                        cell.posterView.alpha = 0.0
+                        UIView.animateWithDuration(1.0, animations: {cell.posterView.alpha = 1.0})
+                    }else{
+                        cell.posterView.image = image
+                    }
                 }, failure: nil)
         }else{
             cell.posterView.setImageWithURL(NSURL(string:"https://browshot.com/static/images/not-found.png")!)
@@ -79,7 +83,7 @@ class MovieViewController: UIViewController,UITableViewDataSource,UITableViewDel
         cell.titleLabel.text = title
         cell.rateLabel.text = "Rate: \(rate)"
         cell.overview.text = overview
-        
+        cell.selectionStyle = .Gray
         return cell
     }
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -95,7 +99,7 @@ class MovieViewController: UIViewController,UITableViewDataSource,UITableViewDel
     func loadData(){
         loadingView.showWithMessage("Loading...")
         let apiKey = "21b5cd324e05edc8b55883d7350ec7e3"
-        let url = NSURL(string:"https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
+        let url = NSURL(string:"https://api.themoviedb.org/3/movie/\(endPoint)?api_key=\(apiKey)")
         let request = NSURLRequest(URL: url!)
         let session = NSURLSession(
             configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
@@ -108,12 +112,11 @@ class MovieViewController: UIViewController,UITableViewDataSource,UITableViewDel
                 if let data = dataOrNil {
                     if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
                         data, options:[]) as? NSDictionary {
-                            NSLog("loading Data")
                             
                             self.movies = responseDictionary["results"] as? [NSDictionary]
                             self.filteredMovies = self.movies
                             self.tableView.reloadData()
-                            
+                            print("Endpoint = \(self.endPoint)")
                     }
                 }else{
                     NSLog("Network Error")
@@ -143,14 +146,28 @@ class MovieViewController: UIViewController,UITableViewDataSource,UITableViewDel
             ),
             dispatch_get_main_queue(), closure)
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPathForCell(cell)
+        let movie = movies![indexPath!.row]
+        let detailViewController = segue.destinationViewController as! DetailViewController
+        detailViewController.movie = movie
+        
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.tabBarController!.tabBar.hidden = false
+        let nav = self.navigationController?.navigationBar
+        nav?.tintColor = UIColor.whiteColor()
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+    }
 
 }

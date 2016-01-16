@@ -16,8 +16,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        //UINavigationBar.appearance().barTintColor = UIColor(red: 80.0/255.0, green: 0.0, blue: 0.0, alpha: 1.0)
-        //UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let nowPlayingNavigationController = storyboard.instantiateViewControllerWithIdentifier("MoviesNavigationController") as! UINavigationController
+        let nowPlayingViewController = nowPlayingNavigationController.topViewController as! MovieViewController
+        nowPlayingViewController.endPoint = "now_playing"
+        nowPlayingViewController.title = "Now Playing"
+        nowPlayingNavigationController.tabBarItem.title = "Now Playing"
+        nowPlayingNavigationController.tabBarItem.image = UIImage(named: "now_playing.png")
+        
+        
+        let topRatedNavigationController = storyboard.instantiateViewControllerWithIdentifier("MoviesNavigationController") as! UINavigationController
+        let topRatedViewController = topRatedNavigationController.topViewController as! MovieViewController
+        topRatedViewController.endPoint = "top_rated"
+        topRatedViewController.title = "Top Rated"
+        topRatedNavigationController.tabBarItem.title = "Top Rated"
+        topRatedNavigationController.tabBarItem.image = UIImage(named: "top_rated.png")
+        
+        let popularNavigationController = storyboard.instantiateViewControllerWithIdentifier("MoviesNavigationController") as! UINavigationController
+        let popularViewController = popularNavigationController.topViewController as! MovieViewController
+        popularViewController.endPoint = "popular"
+        popularViewController.title = "Popular"
+        popularNavigationController.tabBarItem.title = "Popular"
+        popularNavigationController.tabBarItem.image = UIImage(named: "top_rated.png")
+        
+        
+        let upcomingNavigationController = storyboard.instantiateViewControllerWithIdentifier("MoviesNavigationController") as! UINavigationController
+        let upcomingViewController = upcomingNavigationController.topViewController as! MovieViewController
+        upcomingViewController.endPoint = "upcoming"
+        upcomingViewController.title = "Upcoming"
+        upcomingNavigationController.tabBarItem.title = "Upcoming"
+        upcomingNavigationController.tabBarItem.image = UIImage(named: "top_rated.png")
+        
+        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [nowPlayingNavigationController,topRatedNavigationController,popularNavigationController, upcomingNavigationController]
+        
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
+        
+        UINavigationBar.appearance().barTintColor = UIColor(red: 27.0/255.0, green: 99.0/225.0, blue: 130.0/255.0, alpha: 1.0)        
         return true
     }
 
