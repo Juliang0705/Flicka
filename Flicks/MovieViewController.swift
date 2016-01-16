@@ -62,6 +62,7 @@ class MovieViewController: UIViewController,UITableViewDataSource,UITableViewDel
         let movie = filteredMovies![indexPath.row]
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
+        let rate = String(movie["vote_average"]!)
         //images may not be available
         if let posterPath = movie["poster_path"] as? String{
             let baseUrl = "http://image.tmdb.org/t/p/w500"
@@ -76,6 +77,7 @@ class MovieViewController: UIViewController,UITableViewDataSource,UITableViewDel
             cell.posterView.setImageWithURL(NSURL(string:"https://browshot.com/static/images/not-found.png")!)
         }
         cell.titleLabel.text = title
+        cell.rateLabel.text = "Rate: \(rate)"
         cell.overview.text = overview
         
         return cell
