@@ -29,7 +29,7 @@ class DetailViewController: UIViewController {
         
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
-        let rate = String(movie["vote_average"]!)
+        let rate = String(format:"%.2f", movie["vote_average"]! as! Double)
         //images may not be available
         if let posterPath = movie["poster_path"] as? String{
             let baseUrl = "http://image.tmdb.org/t/p/w500"
@@ -101,7 +101,6 @@ class DetailViewController: UIViewController {
                             if let reviews = responseDictionary["results"] as? [NSDictionary]{
                                 if reviews.count != 0{
                                     self.reviewLabel.text = "Review:\n \(reviews[0]["content"] as! String)"
-                                    print(reviews[0]["content"])
                                 }
                             }
                     }

@@ -10,7 +10,7 @@ import UIKit
 import AFNetworking
 import BFRadialWaveHUD
 
-class MovieViewController: UIViewController,UITableViewDataSource,UITableViewDelegate, UISearchBarDelegate {
+class MovieViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,  UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -86,6 +86,11 @@ class MovieViewController: UIViewController,UITableViewDataSource,UITableViewDel
         cell.selectionStyle = .Gray
         return cell
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        view.endEditing(true)
+
+    }
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         
         filteredMovies = searchText.isEmpty ? movies! : movies!.filter({ (dict) -> Bool in
@@ -94,6 +99,16 @@ class MovieViewController: UIViewController,UITableViewDataSource,UITableViewDel
             })
         
         tableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.endEditing(true)
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.endEditing(true)
     }
     
     func loadData(){
