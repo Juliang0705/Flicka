@@ -89,8 +89,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
-
+The keyboard is difficult to hide when not using search bar
 ## License
 
 Copyright [2016] [Juliang Li]
